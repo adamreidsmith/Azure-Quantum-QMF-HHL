@@ -104,7 +104,7 @@ class AzureRunner:
         # If a dry run, do not run the QPU
         # Instead, we just simulate the results
         if self.dryrun:
-            job = self.sim.run(qc_transpiled, shots=self.shots)
+            job = self.sim.run(qc, shots=self.shots)
         elif run_id is None:
             job = self.backend.run(qc_transpiled, shots=self.shots)
             print(f'Job {job.id()} submitted')
