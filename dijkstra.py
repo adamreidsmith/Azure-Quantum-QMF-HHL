@@ -166,27 +166,21 @@ def reconstruct_shortest_path(shortest_path_tree, end):
 
 if __name__ == '__main__':
     random.seed(1223334444)
-    graph = generate_graph(10, sparsity=0.5)
+    graph = generate_graph(15, sparsity=0.5)
     visualize_graph(graph)
 
     distances, shortest_path_tree = dijkstra(graph, 0)
     print(reconstruct_shortest_path(shortest_path_tree, 9))
 
     # DH algo succeeds with just a single shot (on ideal simulator)
-    quantum_runner = AzureRunner('quantinuum.qpu.h1-1', shots=1, dryrun=True)
+    quantum_runner = AzureRunner('ionq.qpu', shots=1, dryrun=True)
     distances, shortest_path_tree = dijkstra_qmf(graph, 0, durr_hoyer_qmf, quantum_runner=quantum_runner)
     print(reconstruct_shortest_path(shortest_path_tree, 9))
     print(quantum_runner.n_calls)
     print(quantum_runner.total_cost, quantum_runner.currency)
 
-    quantum_runner = AzureRunner('quantinuum.qpu.h1-1', shots=8, dryrun=True)
+    quantum_runner = AzureRunner('ionq.qpu', shots=8, dryrun=True)
     distances, shortest_path_tree = dijkstra_qmf(graph, 0, makhanov_qmf, quantum_runner=quantum_runner, repeats=50)
     print(reconstruct_shortest_path(shortest_path_tree, 9))
     print(quantum_runner.n_calls)
     print(quantum_runner.total_cost, quantum_runner.currency)
-
-    # graph = generate_graph(100, sparsity=0.9)
-    # # visualize_graph(graph)
-
-    # avg_neighbours = sum(sum(1 for _ in graph.neighbors(node)) for node in graph.nodes) / len(graph.nodes)
-    # print(avg_neighbours)
