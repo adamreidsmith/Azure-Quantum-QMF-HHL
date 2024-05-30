@@ -1,0 +1,1 @@
+This repository contains code experimenting with extending Dijkstra's algorithm using quantum minimum finding algorithms and a simple implementation of the HHL algorithm.  A report summarizing the experiments and providing some insights into using the Azure Quantum platform is presented in [summary_of_experiments.pdf](summary_of_experiments.pdf).
